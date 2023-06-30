@@ -21,14 +21,34 @@ Param
     $SubscriptionId ="",
     [Parameter(Mandatory=$true)][ValidateNotNullOrEmpty()] 
     [String] 
-    $ResourceGroupName ="", 
+    $ResourceGroupName="", 
     [Parameter(Mandatory=$true)][ValidateNotNullOrEmpty()] 
     [String] 
-    $ClusterName =""
+    $ServerName="", 
+    [Parameter(Mandatory=$true)][ValidateNotNullOrEmpty()] 
+    [String] 
+    $PoolName="", 
+    [Parameter(Mandatory=$true)][ValidateNotNullOrEmpty()] 
+    [String] 
+    $Edition="", 
+    [Parameter(Mandatory=$true)][ValidateNotNullOrEmpty()] 
+    [int32] 
+    $Dtu=50, 
+    [Parameter(Mandatory=$true)][ValidateNotNullOrEmpty()] 
+    [int32] 
+    $DatabaseDtuMax=50,
+    [Parameter(Mandatory=$true)][ValidateNotNullOrEmpty()] 
+    [int32] 
+    $Capacity=50,
+    [Parameter(Mandatory=$true)][ValidateNotNullOrEmpty()] 
+    [int32] 
+    $DatabaseCapacityMax=50,
+    [Parameter(Mandatory=$true)][ValidateNotNullOrEmpty()] 
+    [int32] 
+    $StorageMB=50
 )
 
 Write-Output "Script starts."
-
 # Authenticate using System Managed Identity
 try
 {
@@ -43,10 +63,13 @@ catch {
 # Set context to subscription
 Set-AzContext -SubscriptionId $SubscriptionId
 
-Write-Output "`nDeleting evicted pods in cluster $ClusterName"
-Invoke-AzAksRunCommand 	-ResourceGroupName $ResourceGroupName `
-						-Name $ClusterName `
-						-Command "kubectl delete pods --all-namespaces=true --field-selector 'status.phase==Failed'" `
-						-force
+$ep = Get-AzSqlElasticPool -resourcegroupname $ResourceGroupName -serverName $ServerName -ElasticPoolName $PoolName
+Write-Output "Current Elastic Pool configuration: " $ep
 
-Write-Output "Script ends."
+Set-AzSqlElasticPool -ElasticPoolName $PoolName `
+-Edition $Edition `
+-Dtu $Dtu `
+-StorageMB $StorageMB `
+-DatabaseDtuMax $DatabaseDtuMax `
+-ServerName $ServerName `
+-ResourceGroupName $ResourceGroupName
