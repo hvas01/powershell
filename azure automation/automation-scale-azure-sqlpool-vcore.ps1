@@ -23,25 +23,25 @@ Param
     $SubscriptionId ="93c54646-be8d-459d-9ceb-023cd3cc0282",
     [Parameter(Mandatory=$true)][ValidateNotNullOrEmpty()] 
     [String] 
-    $ResourceGroupName="rg-didi-test", 
+    $ResourceGroupName="rg-tim-test", 
     [Parameter(Mandatory=$true)][ValidateNotNullOrEmpty()] 
     [String] 
-    $ServerName="sqlserver-didi-staging", 
+    $ServerName="sqlserver-tim-test", 
     [Parameter(Mandatory=$true)][ValidateNotNullOrEmpty()] 
     [String] 
-    $PoolName="sqlpool-didi-test", 
-    [Parameter(Mandatory=$true)][ValidateSet("Basic","Standard","Premium")] 
+    $PoolName="sqlpool-tim-test", 
+    [Parameter(Mandatory=$true)][ValidateSet("GeneralPurpose")] 
     [String] 
-    $Edition="Standard", 
-    [Parameter(Mandatory=$true)][ValidateSet("50","100","200","300","400","800","1200","1600","2000","2500","3000")] 
+    $Edition="Input GeneralPurpose is recommended", 
+    [Parameter(Mandatory=$true)][ValidateSet("Gen5")] 
     [String] 
-    $Dtu="50", 
-    [Parameter(Mandatory=$true)][ValidateSet("50","100","200","300","400","800","1200","1600","2000","2500","3000")] 
+    $ComputeGeneration="Input Gen5 is recommended", 
+    [Parameter(Mandatory=$true)][ValidateSet("2","4","6","8","10","12","14","16","18","20")] 
     [String] 
-    $DatabaseDtuMax="50",
+    $VCore="Select VCore in 2/4/6/8/10/12/14/16/18/20",
     [Parameter(Mandatory=$true)][ValidateRange(100, 1000000)] 
     [int32]
-    $StorageMB=200000
+    $StorageMB=358400
 )
 
 Write-Output "Script starts."
@@ -60,13 +60,15 @@ catch {
 Set-AzContext -SubscriptionId $SubscriptionId
 
 $ep = Get-AzSqlElasticPool -resourcegroupname $ResourceGroupName -serverName $ServerName -ElasticPoolName $PoolName
-Write-Output "Current Elastic Pool configuration: `n" $ep
+Write-Output "Current Elastic Pool configuration:" $ep
 
-Write-Output "Changing Elastic Pool SKU..."
+Write-Output "Changing SQL pool SKU..."
 Set-AzSqlElasticPool -ElasticPoolName $PoolName `
 -Edition $Edition `
--Dtu [int]$Dtu `
--DatabaseDtuMax [int]$DatabaseDtuMax `
+-ComputeGeneration $ComputeGeneration `
+-VCore $VCore `
+-DatabaseVCoreMin 0 `
+-DatabaseVCoreMax $VCore `
 -StorageMB $StorageMB `
 -ServerName $ServerName `
 -ResourceGroupName $ResourceGroupName

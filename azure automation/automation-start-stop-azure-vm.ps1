@@ -1,18 +1,20 @@
-#############################################################################
-# Built with Powershell for Azure Automation with System-managed identity
-# Prerequisites
-#   Module: Az suite (Az.Accounts, Az.Compute, Az.SQL, Az.Websites)
-# Usage
-#   Add new Azure Automation Powershell runbook
-# Roadmap
-#   Switch to User-managed identity
-# License
-#   Anh: Still not think about this ^_^
-# Contact
-#   anh.hong@hrs.com
-#   hongvuonganh@gmail.com
-#   https://github.com/hvas01
-#############################################################################
+<#
+Built with Powershell for Azure Automation with System-managed identity
+Prerequisites
+  Module: Az.Accounts, Az.Compute
+Usage
+  Add new Azure Automation runbook Powershell 5.1 with the following scripts content
+   Add new scheduler as required
+   Link runbook with scheduler to complete 
+Roadmap
+  Switch to User-managed identity
+License
+  Anh: Still not think about this ^_^
+Contact
+  anh.hong@hrs.com
+  hongvuonganh@gmail.com
+  https://github.com/hvas01
+#>
 
 Param
 (   
