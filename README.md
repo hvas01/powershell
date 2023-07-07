@@ -1,13 +1,5 @@
-#############################################################################
-# Built with Powershell for Windows scheduler task
-# Prerequisites
-#   Module: Powershell Az suite 
-# Usage
-#   Add new scheduler task with powershell.exe path-to-ps1
-# License
-#   Anh: Still not think about this ^_^
-# Contact
-#   anh.hong@hrs.com
-#   hongvuonganh@gmail.com
-#   https://github.com/hvas01
-#############################################################################
+### About this repository
+This repository contains supporting Powershell code 
+
+### How to contribute
+I'd welcome issue submission and direct contributions. Please feel free to create pull requests or issues as needed.
