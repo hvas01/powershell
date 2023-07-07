@@ -1,0 +1,2 @@
+Get-ADGroupMember -identity "Domain Users" -Recursive | Get-ADUser -Property DisplayName, Enabled | Select DisplayName , SamAccountName, Enabled | Export-csv -path D:\temp\DomainUsers.csv -NoTypeInformation
+Get-ADGroupMember -identity "Domain Admins" -Recursive | Get-ADUser -Property DisplayName, Enabled  | Select DisplayName, SamAccountName, Enabled | Export-csv -path D:\temp\DomainAdmins.csv -NoTypeInformation
