@@ -16,7 +16,7 @@ $ContainerName = 'eventlog'
 $BlobName = (Get-Item $UploadFile).Name
 
 $DstFile = 'https://storecommondiagtest.blob.core.windows.net/' + $ContainerName + "/" + $BlobName
-$SAS = '?sv=2019-02-02&ss=bfqt&srt=sco&sp=rwdlacup&se=2020-02-25T19:23:53Z&st=2020-02-25T11:23:53Z&spr=https&sig=I8de9rR61ZyEg0MExf905Hz%2BJvWCLCee%2BFOZPTeOVtM%3D'
+$SAS = 'SAS'
 
 $DstFileSAS = $DstFile + $SAS
 
