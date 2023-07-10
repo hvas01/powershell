@@ -11,7 +11,7 @@
 $connectTestResult = Test-NetConnection -ComputerName storetimprd.file.core.windows.net -Port 445
 if ($connectTestResult.TcpTestSucceeded) {
     # Save the password so the drive will persist on reboot
-    cmd.exe /C "cmdkey /add:`"storetimprd.file.core.windows.net`" /user:`"localhost\storetimprd`" /pass:`"0ag17tELVlty8Xpn2jJrV34AH8QphE07ITzmNFJj03aNkIyHaWtXsyHdldtmKxcOpIvDQWkXy8H5gcc/dxktrw==`""
+    cmd.exe /C "cmdkey /add:`"storetimprd.file.core.windows.net`" /user:`"localhost\storetimprd`" /pass:`"AccountKey`""
     # Mount the drive
     New-PSDrive -Name M -PSProvider FileSystem -Root "\\storetimprd.file.core.windows.net\data-prd" -Persist
 } else {
@@ -25,7 +25,7 @@ if ($connectTestResult.TcpTestSucceeded) {
 $connectTestResult = Test-NetConnection -ComputerName storebackupprd.file.core.windows.net -Port 445
 if ($connectTestResult.TcpTestSucceeded) {
     # Save the password so the drive will persist on reboot
-    cmd.exe /C "cmdkey /add:`"storebackupprd.file.core.windows.net`" /user:`"localhost\storebackupprd`" /pass:`"3DaWk9bDTfem3FQ5c3ObsYIy7E+TM3sZZu9O+K/9cw6Cqy9abo5upwEhnPJYvJnz+lw9dotsBSGQmmDNLYJmqQ==`""
+    cmd.exe /C "cmdkey /add:`"storebackupprd.file.core.windows.net`" /user:`"localhost\storebackupprd`" /pass:`"AccountKey`""
     # Mount the drive
     New-PSDrive -Name N -PSProvider FileSystem -Root "\\storebackupprd.file.core.windows.net\data-prd" -Persist
 } else {
