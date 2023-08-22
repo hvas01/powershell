@@ -1,6 +1,6 @@
 #TO DO : send email alert
 $uri = "https://api.sendgrid.com/v3/mail/send"
-$token = "token"
+$token = "xxx"
 $body = 
 @"
 {
